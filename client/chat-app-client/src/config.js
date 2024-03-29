@@ -1,0 +1,3 @@
+export const PUBLIC_SERVER_URL = process.env.REACT_APP_SERVER_URL_PUBLIC
+export const LOCAL_SERVER_URL = process.env.REACT_APP_SERVER_URL_LOCAL
+export const ENVIRONMENT = process.env.REACT_APP_ENVIRONMENT
