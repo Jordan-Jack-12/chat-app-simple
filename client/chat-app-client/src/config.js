@@ -1,3 +1,3 @@
-export const PUBLIC_SERVER_URL = process.env.REACT_APP_SERVER_URL_PUBLIC
-export const LOCAL_SERVER_URL = process.env.REACT_APP_SERVER_URL_LOCAL
-export const ENVIRONMENT = process.env.REACT_APP_ENVIRONMENT
+export const PUBLIC_SERVER_URL = "https://aware-large-pika.ngrok-free.app"
+export const LOCAL_SERVER_URL = "http://localhost:5000"
+export const ENVIRONMENT = "prod"

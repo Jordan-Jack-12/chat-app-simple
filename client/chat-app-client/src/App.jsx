@@ -1,18 +1,24 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 import AuthPage from './pages/AuthPage';
 import GlobalChatPage from './pages/GlobalChatPage';
-
+import { ENVIRONMENT, PUBLIC_SERVER_URL, LOCAL_SERVER_URL } from './config';
 
 function App() {
   const [username, setUsername] = useState("");
-  const [backendUrl, setBackendUrl] = useState("https://871e-117-207-9-141.ngrok-free.app");
+  const [backendUrl, setBackendUrl] = useState("");
+
+  useEffect(() => {
+    if (ENVIRONMENT == "prod") {
+      setBackendUrl(PUBLIC_SERVER_URL)
+    } else {
+      setBackendUrl(LOCAL_SERVER_URL)
+    }
+  },[])
+
   return (
     <>
-      {username.length > 1 ? <GlobalChatPage backendUrl={backendUrl} username={username}/>: <AuthPage backendUrl={backendUrl} setUsername={setUsername}/>}
-      {/* <h1>hello</h1> */}
+      {username.length > 1 ? <GlobalChatPage backendUrl={backendUrl} username={username}/> : <AuthPage backendUrl={backendUrl} setUsername={setUsername}/>}
     </>
   )
 }

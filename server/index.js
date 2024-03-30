@@ -15,7 +15,7 @@ const findUser = (db, username, password) => {
 }
 
 require('dotenv').config();
-app.use(cors({origin: "*"}))
+app.use(cors({origin: [process.env.LOCAL_CLIENT_URL, process.env.PUBLIC_CLIENT_URL]}))
 app.use(express.json())
 
 const db = [{username: "suresh", password: "1234"}, {username: "ankit", password: "ankit"}, {username: "omm", password: "ommprakash"}, {username: "kartik", password: "kartik"}];
@@ -24,7 +24,7 @@ const onlineUser = [];
 
 const io = new Server(httpSever, {
   cors : {
-    origin: [process.env.LOC] // configure to the ngrok tunnel domain for the client side
+    origin: [process.env.LOCAL_CLIENT_URL, process.env.PUBLIC_CLIENT_URL] // configure to the ngrok tunnel domain for the client side
   }
 });
 
