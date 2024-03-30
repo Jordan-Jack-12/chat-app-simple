@@ -21,16 +21,10 @@ app.use(express.json())
 const db = [{username: "suresh", password: "1234"}, {username: "ankit", password: "ankit"}, {username: "omm", password: "ommprakash"}, {username: "kartik", password: "kartik"}];
 
 const onlineUser = [];
-let corsOriginSocket;
 
-if (process.env.NODE_ENV == "prod") {
-  corsOriginSocket = process.env.PUBLIC_CLIENT_URL;
-} else {
-  corsOriginSocket = process.env.LOCAL_CLIENT_URL;
-}
 const io = new Server(httpSever, {
   cors : {
-    origin: "https://d1b9-117-207-9-141.ngrok-free.app" // configure to the ngrok tunnel domain for the client side
+    origin: [process.env.LOC] // configure to the ngrok tunnel domain for the client side
   }
 });
 
