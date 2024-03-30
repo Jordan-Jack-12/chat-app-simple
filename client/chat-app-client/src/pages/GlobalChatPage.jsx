@@ -10,6 +10,7 @@ const GlobalChatPage = ({username, backendUrl}) => {
 
   useEffect(() => {
     socket.connect();
+    socket.emit('userconnected', username)
 
     
 

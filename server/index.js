@@ -29,9 +29,9 @@ const io = new Server(httpSever, {
 });
 
 io.on('connection', (socket) => {
-  console.log('user connected')
-  socket.on('connection', (socket) => {
-    console.log("a user connected to server " + socket.id);
+  socket.on('userconnected', (username) => {
+    console.log("a user connected to server " + username);
+    io.emit('rmessage', username, username + " joined the chat")
   })
 
   socket.on('sendmessage', (username, message) => {

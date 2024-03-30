@@ -1,6 +1,7 @@
 import {io} from 'socket.io-client';
+import { ENVIRONMENT, PUBLIC_SERVER_URL, LOCAL_SERVER_URL } from './config';
 
-const backendUrl = "https://871e-117-207-9-141.ngrok-free.app/";
+const backendUrl = PUBLIC_SERVER_URL;
 
 // if (process.env.REACT_APP_ENVIROMENT == prod) {
 //   backendUrl = process.env.REACT_APP_SERVER_URL_PUBLIC;
