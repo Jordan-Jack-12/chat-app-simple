@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      {username.length > 1 ? <GlobalChatPage backendUrl={backendUrl} username={username}/> : <AuthPage backendUrl={backendUrl} setUsername={setUsername}/>}
+      {username.length > 1 ? <GlobalChatPage username={username}/> : <AuthPage backendUrl={backendUrl} setUsername={setUsername}/>}
     </>
   )
 }

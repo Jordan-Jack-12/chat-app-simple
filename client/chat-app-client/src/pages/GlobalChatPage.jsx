@@ -2,7 +2,8 @@ import {useState, useEffect, useRef} from 'react';
 
 import {socket} from "../socket.js";
 
-const GlobalChatPage = ({username, backendUrl}) => {
+// eslint-disable-next-line react/prop-types
+const GlobalChatPage = ({ username }) => {
   const messageBoxArea = useRef();
   const [currentMsg, setCurrentMsg] = useState("");
 
@@ -12,11 +13,11 @@ const GlobalChatPage = ({username, backendUrl}) => {
     socket.connect();
     socket.emit('userconnected', username)
 
-    
-
     return () => {
+      socket.emit('userdisconnected', username)
       socket.disconnect();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
     
   socket.on('rmessage', (username, message) => {

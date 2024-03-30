@@ -39,6 +39,10 @@ io.on('connection', (socket) => {
     console.log(onlineUser);
   })
 
+  socket.on('userdisconnected', (username) => {
+    io.emit('rmessage', "SERVER", `${username} left the global chat`)
+  })
+
 })
 
 app.get("/", (req, res) => {

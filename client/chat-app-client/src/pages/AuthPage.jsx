@@ -1,6 +1,7 @@
 import {useState} from 'react'
 
-const AuthPage = ({setUsername, backendUrl}) => {
+// eslint-disable-next-line react/prop-types
+const AuthPage = ({ setUsername, backendUrl }) => {
   const [user, setUser] = useState({
     username: "",
     password: ""
