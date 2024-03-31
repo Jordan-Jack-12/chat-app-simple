@@ -1,4 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
+import GlobalChatBox from '../components/GlobalChatBox';
+import PrivateChatBox from '../components/PrivateChatBox';
 
 import {socket} from "../socket.js";
 
@@ -6,50 +8,37 @@ import {socket} from "../socket.js";
 const GlobalChatPage = ({ username }) => {
   const messageBoxArea = useRef();
   const [currentMsg, setCurrentMsg] = useState("");
+  const [isGlobalChat, setIsGlobalChat] = useState(true);
+  const [isChatListOpen, setIsChatListOpen] = useState(false);
+  const [currentRoom, setCurrentRoom] = useState("");
 
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    socket.connect();
-    socket.emit('userconnected', username)
+    // socket.connect();
+    // socket.emit('userconnected', username)
 
     return () => {
-      socket.emit('userdisconnected', username)
-      socket.disconnect();
+      // socket.emit('userdisconnected', username)
+      // socket.disconnect();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
     
-  socket.on('rmessage', (username, message) => {
-      setMessages([...messages, {username : username, message : message}]);
-      if (messageBoxArea.current) {
-          messageBoxArea.current.scrollIntoView();
-      }
-  });
+  // socket.on('rmessage', (username, message) => {
+  //     setMessages([...messages, {username : username, message : message}]);
+  //     if (messageBoxArea.current) {
+  //         messageBoxArea.current.scrollIntoView();
+  //     }
+  // });
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    socket.emit('sendmessage', username, currentMsg)
-    setCurrentMsg("");
-  }
+
 
   return (
     <>
       <div style={{"height" : "100%"}}>
         <div style={{"background": "green"}}><h4>Username : {username}</h4></div>
-        <div><h3>Global Chat </h3></div>
-        <div style={{"height" : "70vh", "display" : "flex", "flexDirection" : "column", "overflowY" : "scroll", "justifyContent": "start",}} className={"message-box"}>
-        {messages.map((item, i)=> {
-          return (
-            <div key={i} style={{"textAlign" : "left"}} > <strong>{item.username} </strong> : {item.message} </div>
-        )
-        })}
-          <div ref={messageBoxArea}></div>
-        </div>
-        <div>
-          <input type="text" placeholder="your message" value={currentMsg} onChange={(e) => setCurrentMsg(e.target.value)}/>
-          <button onClick={handleClick}>Send</button>
-        </div>
+        {isGlobalChat ? <GlobalChatBox socket={socket} username={username}/>: <PrivateChatBox />}
       </div>
     </>
   )
